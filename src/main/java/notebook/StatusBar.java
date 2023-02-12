@@ -7,50 +7,84 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class StatusBar extends JPanel {
+public final class StatusBar extends JPanel {
 	
-	int numberOfWords;
-	int numberOfSymbols;
-	int numberOfCharacters;
-	int numberOfParagraphs;
+	private static final Font STATUS_BAR_FONT = new Font("ARIAL", Font.PLAIN, 10);
+	private static final int WIDTH = 200;
+	private static final int HEIGHT = 50;
+
 	
-	JLabel words;
-	JLabel symbols;
-	JLabel withoutSpaces;
-	JLabel paragraphs;
+	private JLabel words;
+	private JLabel symbols;
+	private JLabel withoutSpaces;
+	private JLabel paragraphs;
 	
-	StatusBar(){
-		
-		words = new JLabel();
-		words.setSize(200, 50);
-		words.setText("          " + numberOfWords + "  WORDS     |");
-		words.setFont(new Font("ARIAL", Font.PLAIN, 10));
-		words.setForeground(Color.BLACK);
-		
-		symbols = new JLabel();
-		symbols.setSize(200, 50);
-		symbols.setText("          " + numberOfWords + "  SYMBOLS     |");
-		symbols.setFont(new Font("ARIAL", Font.PLAIN, 10));
-		symbols.setForeground(Color.BLACK);
-		
-		withoutSpaces = new JLabel();
-		withoutSpaces.setSize(200, 50);
-		withoutSpaces.setText("          " + numberOfWords + "  WITHOUT WHITE SPACES     |");
-		withoutSpaces.setFont(new Font("ARIAL", Font.PLAIN, 10));
-		withoutSpaces.setForeground(Color.BLACK);
-		
-		paragraphs = new JLabel();
-		paragraphs.setSize(200, 50);
-		paragraphs.setText("          " + numberOfWords + "  PARAGRAPHS  ");
-		paragraphs.setFont(new Font("ARIAL", Font.PLAIN, 10));
-		paragraphs.setForeground(Color.BLACK);
-		
+	public StatusBar(){
+		initializeComponents();
+		configureWordsLabel();
+		configureSymbolsLabel();
+		configureWithoutSpacesLabel();
+		configureParagraphsLabel();
+		setStatusBarParameters();
+	}
+
+	private void setStatusBarParameters() {
 		this.setBackground(new Color(200, 200, 200));
 		this.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		
 		this.add(words);
 		this.add(symbols);
 		this.add(withoutSpaces);
 		this.add(paragraphs);
+	}
+
+	private void configureSymbolsLabel() {
+		symbols.setSize(WIDTH, HEIGHT);
+		symbols.setText(String.format("%11d%s", 0, "  SYMBOLS   |"));
+		symbols.setFont(STATUS_BAR_FONT);
+		symbols.setForeground(Color.BLACK);
+	}
+
+	private void configureWordsLabel() {
+		words.setSize(WIDTH, HEIGHT);
+		words.setText(String.format("%11d%s", 0, "  WORDS   |"));
+		words.setFont(STATUS_BAR_FONT);
+		words.setForeground(Color.BLACK);
+	}
+
+	private void configureWithoutSpacesLabel() {
+		withoutSpaces.setSize(WIDTH, HEIGHT);
+		withoutSpaces.setText(String.format("%11d%s", 0, "  WITHOUT WHITE SPACES   |"));
+		withoutSpaces.setFont(STATUS_BAR_FONT);
+		withoutSpaces.setForeground(Color.BLACK);
+	}
+
+	private void configureParagraphsLabel() {
+		paragraphs.setSize(WIDTH, HEIGHT);
+		paragraphs.setText(String.format("%11d%s", 0, "  PARAGRAPHS   |"));
+		paragraphs.setFont(STATUS_BAR_FONT);
+		paragraphs.setForeground(Color.BLACK);
+	}
+
+	private void initializeComponents(){
+		words = new JLabel();
+		symbols = new JLabel();
+		withoutSpaces = new JLabel();
+		paragraphs = new JLabel();
+	}
+
+	public JLabel getWords() {
+		return words;
+	}
+
+	public JLabel getSymbols() {
+		return symbols;
+	}
+
+	public JLabel getWithoutSpaces() {
+		return withoutSpaces;
+	}
+
+	public JLabel getParagraphs() {
+		return paragraphs;
 	}
 }

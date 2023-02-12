@@ -1,28 +1,30 @@
 package notebook;
 
-public class Counter {
-	
-	static String[] words;
-	static String[] paragraphs;
+public final class Counter {
+
+	private static String[] words;
+	private static String[] paragraphs;
+
+	private Counter(){ }
 	
 	public static int charCount(String str) {
-		return str.length();
+		return str == null ? 0 : str.length();
 	}
 
 	public static int wordCount(String str) {
-		if (str == null || str.isEmpty()) {
+		if (str == null || str.trim().isEmpty()) {
 		      return 0;
 		    }
-		words = str.split("\\s+");
+		words = str.replaceAll("\\s", " ").trim().split("\\s+");
 		return words.length;
 	}
 	
 	public static int withoutSpacesCount(String str) {
-		return str.replace(" ", "").replace("	", "").replace("\n", "").length();
+		return str == null ? 0 : str.replaceAll("\\s", "").length();
 	}
 	
 	public static int paragraphCount(String str) {
-		if (str == null || str.isEmpty()) {
+		if (str == null || str.trim().isEmpty()) {
 		      return 0;
 		    }
 		paragraphs = str.split("\\R+");

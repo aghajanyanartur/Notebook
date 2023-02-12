@@ -1,9 +1,8 @@
 package notebook;
 
-public class Notebook {
+public final class Notebook {
 
 	public static void main(String[] args) {
-		
 		new NotebookFrame();
 	}
 }
